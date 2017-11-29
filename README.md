@@ -6,8 +6,15 @@ depends on `git-together`
 https://github.com/kejadlen/git-together is required to run `git-author`.
 
 # Setup
+
 `setup.sh` simply created a `.git-author` file as the home directory, and also
-configure the git to use that file as `commit.template`.
+configured the `git` to use that file as `commit.template`. Then, it copied the
+`git-author` to search path so that `git` can find it and treat it as `git
+author` command.
+
+Also `export GIT_TOGETHER_NO_SIGNOFF=1` in your environment (e.g. in `~/.bashrc`
+on Linux or `~/.bash_profile` on MacOs). It will disable the `--signoff` used
+by `git-together commit`.
 
 # Usage
 Follow the instruction from https://github.com/kejadlen/git-together to setup

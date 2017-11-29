@@ -1,11 +1,10 @@
 #!/bin/bash
 
+# create an empty template if it doesn't exist
 touch ~/.git-author
 
+# config git to use a commit template
 git config --global commit.template ~/.git-author
 
-cat >> ~/.bashrc <<EOL
-
-# disable --signoff called by 'git-together commit'
-export GIT_TOGETHER_NO_SIGNOFF=1
-EOL
+# put git-author to search path, so that `git author` works.
+cp git-author /usr/local/bin
