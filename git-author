@@ -4,7 +4,7 @@ git_author_file_name=~/.git-author
 
 if [ -n "$1" ] ; then
 	echo $'\n' > $git_author_file_name
-	git together with $@ | sed "s/.*/Author: &/" >> $git_author_file_name
+	git-together with $@ | sed "s/.*/Author: &/" >> $git_author_file_name
 fi
 
 cat $git_author_file_name
