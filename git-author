@@ -7,5 +7,6 @@ if [ -n "$1" ] ; then
 	git-together with $@ | sed "s/.*/Author: &/" >> $git_author_file_name
 fi
 
-cat $git_author_file_name
+# Do not print blank lines because it's clutter on the terminal
+<$git_author_file_name awk '!/^$/{print}'
 
