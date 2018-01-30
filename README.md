@@ -27,7 +27,7 @@ git author
 ```
 
 After doing so, `git commit` will now automatically include all of the authors
-in the commit message with the prefix `Author:`. For example:
+in the commit message with the prefix `Co-authored-by:`. For example:
 
 ```
 # mobbing
@@ -39,9 +39,9 @@ git commit
 # the commit message is pre-populated as:
 
 
-Author: James Holden <jholden@rocinante.com>
-Author: Naomi Nagata <nnagata@rocinante.com>
-Author: Chrisjen Avasarala <avasarala@un.gov>
+Co-authored-by: James Holden <jholden@rocinante.com>
+Co-authored-by: Naomi Nagata <nnagata@rocinante.com>
+Co-authored-by: Chrisjen Avasarala <avasarala@un.gov>
 ```
 
 # Why
