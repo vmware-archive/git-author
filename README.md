@@ -3,8 +3,8 @@ A simple tool to add multiple authors to commit mesages. Under the hood it is
 based on `git commit --template` and depends on `git-together`.
 
 # Setup
-1. Follow the instructions from https://github.com/kejadlen/git-together to set up
-   the `git-together` configurations.
+1. Follow the instructions from https://github.com/kejadlen/git-together to set
+   up the `git-together` configurations.
 2. Run `setup.sh`.
 3. Add `export GIT_TOGETHER_NO_SIGNOFF=1` to your environment (e.g. in
    `~/.bashrc` on Linux or `~/.bash_profile` on MacOS). This will disable the
@@ -12,6 +12,7 @@ based on `git commit --template` and depends on `git-together`.
 
 # Usage
 Set the authors as below:
+
 ```
 # pairing with James and Naomi
 git author jh nn
@@ -27,8 +28,8 @@ git author
 ```
 
 After doing so, `git commit` will now automatically include all of the authors
-in the commit message with the prefix `Co-authored-by:` or `Authored-by` if there
-is only one author. For example:
+in the commit message with the prefix `Co-authored-by:` or `Authored-by` if
+there is only one author. For example:
 
 ```
 # mobbing
@@ -56,6 +57,24 @@ git commit
 
 Authored-by: Chrisjen Avasarala <avasarala@un.gov>
 ```
+
+## Story Numbers
+Often when making commits, we like to append the commit message with a story
+number, e.g. `[#12345678]`. To automate this process, you can set the
+`$STORY_NUM` environment variable to a value such as `'#12345678 story title'`.
+This will result in the below being appended to the commit message template:
+
+```
+[#12345678]
+# story title
+
+Co-authored-by: ...
+Co-authored-by: ...
+```
+
+Additionally, if you set `git config --global git-author.includeBlankStoryNum true`,
+then if you didn't set `$STORY_NUM`, empty story number brackets ('[]') will be
+appended to prompt you to fill it in.
 
 # Why
 `git-together` is a wonderful tool to change the `author` and `commit` fields
