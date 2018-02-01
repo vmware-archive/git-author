@@ -2,15 +2,35 @@
 
 git_author_file_name=~/.git-author
 
-if [ -n "$1" ] ; then
-	echo $'\n' > $git_author_file_name
-	if [ $# == 1 ]; then
-		git-together with $@ | sed "s/.*/Authored-by: &/" >> $git_author_file_name
+print_story_num()
+{
+	if [ "$(git config git-author.includeBlankStoryNum)" = 'true' \
+	     -o -n "$STORY_NUM" ] ; then
+		<<<"$STORY_NUM" read story_num story_comment
+		echo "[$story_num]"
+		echo "# $story_comment"
+		echo ""
+	fi
+}
+
+insert_author_tags()
+{
+	local number_of_authors="$1"
+	if [ "$number_of_authors" -eq 1 ] ; then
+		sed "s/.*/Authored-by: &/"
 	else
-		git-together with $@ | sed "s/.*/Co-authored-by: &/" >> $git_author_file_name
-	fi;
+		sed "s/.*/Co-authored-by: &/"
+	fi
+}
+
+if [ -n "$1" ] ; then
+	(
+		echo ""
+		echo ""
+		print_story_num
+		git-together with "$@" | insert_author_tags $#
+	) > "$git_author_file_name"
 fi
 
-# Do not print blank lines because it's clutter on the terminal
-<$git_author_file_name awk '!/^$/{print}'
-
+# Echo the script, but do not print blank lines because it's clutter on the terminal
+<"$git_author_file_name" awk '!/^$/{print}'
