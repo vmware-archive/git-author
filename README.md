@@ -23,7 +23,7 @@ git author jh
 # mobbing
 git author jh nn ca
 
-# show who are included in current ~/.git-author
+# show who are included in current ~/.git-author-template
 git author
 ```
 
