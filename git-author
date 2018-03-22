@@ -1,6 +1,6 @@
 #!/bin/bash
 
-git_author_file_name=~/.git-author
+git_author_file_name=~/.git-author-template
 
 print_story_num()
 {
