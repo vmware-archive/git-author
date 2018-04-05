@@ -60,8 +60,13 @@ Authored-by: Chrisjen Avasarala <avasarala@un.gov>
 
 ## Story Numbers
 Often when making commits, we like to append the commit message with a story
-number, e.g. `[#12345678]`. To automate this process, you can set the
-`$STORY_NUM` environment variable to a value such as `'#12345678 story title'`.
+number, e.g. `[#12345678]`. To automate this process, you set the
+`$STORY_NUM` environment variable to a value such as `'#12345678 story title'`. For example:
+
+```bash
+STORY_NUM='#12345678 story title' git-author alice bob
+```
+
 This will result in the below being appended to the commit message template:
 
 ```
