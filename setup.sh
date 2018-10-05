@@ -1,10 +1,13 @@
 #!/bin/bash
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
+
+GIT_AUTHOR_FILE_NAME=/tmp/.git-author-template
 
 # create an empty template if it doesn't exist
-touch ~/.git-author-template
+touch ${GIT_AUTHOR_FILE_NAME}
 
 # config git to use a commit template
-git config --global commit.template ~/.git-author-template
+git config --global commit.template ${GIT_AUTHOR_FILE_NAME}
 
 # put git-author to search path, so that `git author` works.
-cp git-author /usr/local/bin
+cp ${SCRIPT_DIR}/git-author /usr/local/bin

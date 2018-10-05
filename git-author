@@ -1,6 +1,6 @@
 #!/bin/bash
 
-git_author_file_name=~/.git-author-template
+GIT_AUTHOR_FILE_NAME=/tmp/.git-author-template
 
 print_story_num()
 {
@@ -23,14 +23,17 @@ insert_author_tags()
 	fi
 }
 
+# Make sure the template file exists
+touch "$GIT_AUTHOR_FILE_NAME"
+
 if [ -n "$1" ] ; then
 	(
 		echo ""
 		echo ""
 		print_story_num
 		git-together with "$@" | insert_author_tags $#
-	) > "$git_author_file_name"
+	) > "$GIT_AUTHOR_FILE_NAME"
 fi
 
 # Echo the script, but do not print blank lines because it's clutter on the terminal
-<"$git_author_file_name" awk '!/^$/{print}'
+<"$GIT_AUTHOR_FILE_NAME" awk '!/^$/{print}'
