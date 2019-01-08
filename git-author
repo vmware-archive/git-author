@@ -31,7 +31,7 @@ if [ -n "$1" ] ; then
 		echo ""
 		echo ""
 		print_story_num
-		git-together with "$@" | insert_author_tags $#
+		git-together with --global "$@" | insert_author_tags $#
 	) > "$GIT_AUTHOR_FILE_NAME"
 fi
 
