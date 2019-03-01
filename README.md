@@ -4,7 +4,8 @@ based on `git commit --template` and depends on `git-together`.
 
 # Setup
 1. Follow the instructions from https://github.com/kejadlen/git-together to set
-   up the `git-together` configurations.
+   up the `git-together` configurations. __Note__: It is not necessary to alias
+   git to git-together.
 2. Run `setup.sh`.
 3. Add `export GIT_TOGETHER_NO_SIGNOFF=1` to your environment (e.g. in
    `~/.bashrc` on Linux or `~/.bash_profile` on MacOS). This will disable the
