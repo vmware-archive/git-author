@@ -62,6 +62,7 @@ Authored-by: Chrisjen Avasarala <avasarala@un.gov>
 Often when making commits, we like to append the commit message with a story
 number, e.g. `[#12345678]`. To automate this process, you can set the
 `$STORY_NUM` environment variable to a value such as `'#12345678 story title'`.
+Run `git author` again for the story number to appear in the commit message.
 This will result in the below being appended to the commit message template:
 
 ```
