@@ -33,6 +33,7 @@ git-author() {
 			echo ""
 			print_story_num
 			# always clean-up the git-together.active settings
+			git-together with --clear 2>/dev/null || true
 			git-together with --global "$@" | insert_author_tags $#
 		) > "${git_author_file_name}"
 	fi
