@@ -1,21 +1,23 @@
 #!/bin/bash
 
-GIT_AUTHOR_FILE_NAME=${HOME}/.git-author-template
+setup_env() {
+	git_author_file_name=${HOME}/.git-author-template
+	# Make sure the template file exists
+	touch "${git_author_file_name}"
+}
 
-print_story_num()
-{
+print_story_num() {
 	if [ "$(git config git-author.includeBlankStoryNum)" = 'true' \
-	     -o -n "$STORY_NUM" ] ; then
-		<<<"$STORY_NUM" read story_num story_comment
-		echo "[$story_num]"
-		echo "# $story_comment"
+	     -o -n "${STORY_NUM}" ] ; then
+		<<<"${STORY_NUM}" read story_num story_comment
+		echo "[${story_num}]"
+		echo "# ${story_comment}"
 		echo ""
 	fi
 }
 
-insert_author_tags()
-{
-	local number_of_authors="$1"
+insert_author_tags() {
+	local number_of_authors="${1}"
 	if [ "$number_of_authors" -eq 1 ] ; then
 		sed "s/.*/Authored-by: &/"
 	else
@@ -23,17 +25,23 @@ insert_author_tags()
 	fi
 }
 
-# Make sure the template file exists
-touch "$GIT_AUTHOR_FILE_NAME"
+git-author() {
+	local first_author="${1}"
+	if [ -n "${first_author}" ] ; then
+		(
+			echo ""
+			echo ""
+			print_story_num
+			# always clean-up the git-together.active settings
+			git-together with --global "$@" | insert_author_tags $#
+		) > "${git_author_file_name}"
+	fi
 
-if [ -n "$1" ] ; then
-	(
-		echo ""
-		echo ""
-		print_story_num
-		git-together with --global "$@" | insert_author_tags $#
-	) > "$GIT_AUTHOR_FILE_NAME"
+	# Echo the script, but do not print blank lines because it's clutter on the terminal
+	<"${git_author_file_name}" awk '!/^$/{print}'
+}
+
+if [ "${BASH_SOURCE}" = "${0}" ]; then
+	setup_env
+	git-author $@
 fi
-
-# Echo the script, but do not print blank lines because it's clutter on the terminal
-<"$GIT_AUTHOR_FILE_NAME" awk '!/^$/{print}'
