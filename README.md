@@ -119,6 +119,24 @@ Additionally, if you set `git config --global git-author.includeBlankStoryNum tr
 then if you didn't set `$STORY_NUM`, empty story number brackets ('[]') will be
 appended to prompt you to fill it in.
 
+## Global vs. Local `git-together` Settings
+By default, `git-together` will be called with `--global`, hence a system-wide
+configuration of authors are set.
+
+However, for special cases, people like to use non-global configurations just for
+given set of git repos. To support that usage, we introduced another environment
+variable `GIT_AUTHOR_LOCAL`.
+
+If this variable it set `git-together` will be called without `--global` flag.
+Here is the example usage for non-global usage:
+
+```
+GIT_AUTHOR_LOCAL=1 git author jh
+```
+
+If people always wants to use it without `--global`, then can put this environment in
+their shell environment, e.g. `.bashrc`.
+
 # Why
 `git-together` is a wonderful tool to change the `author` and `commit` fields
 in the git commit object, and rotate the authors automatically to evenly
@@ -138,3 +156,15 @@ fields in the git log.
 
 See this discussion on the open source GPDB project's mailing list:
 https://groups.google.com/a/greenplum.org/forum/#!msg/gpdb-dev/qHqa9UbFpSA/u0Y0g2rqAAAJ
+
+# Development
+`git-author` is a bash script, we used [bats](https://github.com/bats-core/bats-core)
+to verify the functionality of this script.
+
+```bash
+# run the tests
+make
+```
+
+You are welcome to extend this utility. Please make sure adding new tests to cover your
+scenario first.
