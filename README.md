@@ -1,3 +1,5 @@
+<h1> VMware has ended active development of this project, this repository will no longer be updated.</h1><br>
+
 # git-author
 A simple tool to add multiple authors to commit messages. Under the hood it is
 based on `git commit --template` and depends on `git-together`.
